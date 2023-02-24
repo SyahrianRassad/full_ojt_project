@@ -1,0 +1,8 @@
+{
+  "volo": {
+    "dependencies": {
+      "jquery": "github:jquery/jquery/3.6.3",
+      "install": "github:wavysandbox/install/master"
+    }
+  }
+}
