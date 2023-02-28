@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 //mongodb
 const mongodb = mongoose.connection
 mongoose.set('strictQuery', true);
-mongoose.connect("mongodb://localhost:27017",{
+mongoose.connect("mongodb://localhost:27017/",{
     useNewUrlParser:true,useUnifiedTopology:true
 },(err)=>{
     if(err)console.log(err)
@@ -38,22 +38,22 @@ mongodb.once("open", () => {
 // 
 
 //sceduller
-const schedule = require("node-schedule")
-const db = require("./mysql/db");
+// const schedule = require("node-schedule")
+// const db = require("./mysql/db");
 
-const tes = schedule.scheduleJob(' */3 * * * *', function(){
-    const date = new Date()
-    console.log("tes scheduler")
-    console.log(date)
+// const tes = schedule.scheduleJob(' */3 * * * *', function(){
+//     const date = new Date()
+//     console.log("tes scheduler")
+//     console.log(date)
 
-    db.query("insert into schedule_trainer set date = ?",date,(err,result)=>{
-        if(err){
-            console.log(err)
-        }{
-            console.log("berhasil input "+ date)
-        }
-    })
-})
+//     db.query("insert into schedule_trainer set date = ?",date,(err,result)=>{
+//         if(err){
+//             console.log(err)
+//         }{
+//             console.log("berhasil input "+ date)
+//         }
+//     })
+// })
 
 //RabbitMq
 const { consumeQueue } = require('./rabbitmq/rabiitMqService');
@@ -68,7 +68,7 @@ consumeQueue('Testing', (ch,msg)=>{
     ch.ack(msg)
 })
 
-
+//nodemailer
 
 app.get("/", (req, res)=>{
     res.send({
